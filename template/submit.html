@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="submit-section">
+
+    <div class="submit-card">
+        <h2>Report an Item</h2>
+        <p>Fill in the details to report a lost or found item</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Item Name</label>
+                <input type="text" name="item_name" placeholder="e.g. Black Backpack">
+            </div>
+
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text" name="department" placeholder="e.g. Agricultral department">
+            </div>
+
+
+           <div class="form-group">
+                <label>Faculty</label>
+                <input type="text" name="faculty" placeholder="e.g. your faculty">
+            </div> 
+
+            <div class="form-group">
+                <label>Description_of_item</label>
+                <textarea name="description_of_item" placeholder="Describe the item..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" placeholder="Where was it lost/found?">
+            </div>
+
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status">
+                    <option value="Lost">Lost</option>
+                    <option value="Found">Found</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Upload Image</label>
+                <input type="file" name="profile_pic">
+            </div>
+
+            <button type="submit" class="btn-submit">Submit Item</button>
+
+        </form>
+    </div>
+
+</section>
+
+{% endblock %}

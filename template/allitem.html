@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="all-items-section">
+
+
+    <div class="all-items-header">
+        <h2>All Reported Items</h2>
+        <p>Browse all lost and found items on campus</p>
+
+        <div class="search-bar">
+            <form method="GET">
+                <input type="text" name="item_name" placeholder="Search by item name or location...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <div class="items-grid">
+
+        {% for item in items %}
+        <div class="item-card">
+
+            {% if item.profile_pic %}
+            <img src="{{ item.profile_pic.url }}" alt="item image">
+            {% else %}
+            <div class="no-image">No Image</div>
+            {% endif %}
+
+            <div class="item-content">
+                <h3>{{ item.item_name }}</h3>
+
+                <p class="desc">
+                    {{ item.description_of_item|truncatechars:80 }}
+                </p>
+
+                <div class="meta">
+                    <span>📍 {{ item.location }}</span>
+                    <span class="status {{ item.status|lower }}">
+                        {{ item.status }}
+                    </span>
+                </div>
+
+                <small>📅 {{ item.created_at }}</small>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

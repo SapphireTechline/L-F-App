@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Recover What You’ve Lost on Campus</h1>
+        <p>Smart, fast and reliable lost & found system for students</p>
+
+        <div class="search">
+            <form method="GET">
+                <input type="text" name="item_name" placeholder="Search lost items...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ITEMS -->
+
+{% if user.is_authenticated %}
+<section class="section">
+    <h2>Recent Reports</h2>
+
+    <div class="grid">
+        {% for top_two_items in top_two_items %}
+        <div class="card">
+            <div class="badge lost
+            {% if top_two_items.status == 'Lost' %}lost
+            {% elif top_two_items.status == 'Found' %}found
+            {% endif %}">
+
+                {{top_two_items.status}}</div>
+
+            {% if top_two_items.profile_pic %}
+            <img src="{{top_two_items.profile_pic.url}}">
+            {% else %}
+            <img src="">
+            {% endif %}
+            <h3>{{top_two_items.item_name}}</h3>
+            <p>{{top_two_items.location}}</p>
+
+        </div>
+        {% endfor %}
+{% endif %}
+
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Lost & Found</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <header class="navbar">
+        <div class="logo">Campus<span>L&F</span></div>
+
+        <nav id="navLinks" class="nav-links">
+            <a href="{% url 'homepage' %}">Home</a>
+            <a href="{% url 'my_posts' %}">My post</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'all_item_page' %}">All Items</a>
+
+            {% if user.is_authenticated %}
+            <form action="{% url 'signout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">signout</button>
+            </form>
+            {% else %}
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit">login</button>
+            </form>
+            {% endif %}
+
+            <a href="{% url 'submit_page' %}" class="btn-nav">Submit Item</a>
+
+        </nav>
+
+        <div class="menu" onclick="toggleMenu()">☰</div>
+    </header>
+
+
+
+    {% block content %}
+
+
+    {% endblock content %}
+
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Did You Lose or Find Something?</h2>
+        <p>Help others recover their belongings faster.</p>
+       
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Campus Lost & Found System</p>
+    </footer>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>
